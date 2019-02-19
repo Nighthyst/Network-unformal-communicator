@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1550499168 source:c:\users\nicod\desktop\cours\cours a4\semestre 8\advanced network programming\td4\server\main.c
+	<stdio.h>
+	<winsock2.h>
+

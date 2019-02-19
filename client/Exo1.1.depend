@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1550501225 source:c:\users\nicod\desktop\cours\cours a4\semestre 8\advanced network programming\td4\exo1.1\main.c
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<dos.h>
+
+1550520922 source:c:\users\nicod\desktop\cours\cours a4\semestre 8\advanced network programming\td4\client\main.c
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<dos.h>
+
