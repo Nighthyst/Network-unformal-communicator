@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1551207029 source:c:\users\nicod\desktop\cours\cours a4\semestre 8\advanced network programming\project\network-unformal-communicator\transfert de fichier\client\main.c
+	<winsock2.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+

@@ -1,7 +1,9 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> // Penser à inclure string.h pour strchr()
 #include<winsock2.h>
-#include<stdio.h>
 #include<dos.h>
+
 
 struct sockaddr_in server;
 
@@ -73,6 +75,8 @@ int receive_data(SOCKET * s, WSADATA * wsa)
 
 int main(int argc , char *argv[])
 {
+    //viderBuffer();
+
     WSADATA wsa;
     SOCKET s;
 
@@ -90,13 +94,19 @@ int main(int argc , char *argv[])
     printf("Vous avez tape : %d\n", port);
 
     char message[200];
-
+    //char sender[200];
+    char * sender = message;
+    //char * sender;
     int stop = 0;
     while(stop == 0)
     {
         printf("Tapez votre message pour %s : %d (sans espace):\n",IP,port);
+        //viderBuffer();
         fgets(message,200,stdin);
+        //sender = message;
         //scanf("%s",&message);
+        //strncpy(sender,message,200);
+        printf("Vous voulez envoyer le message : %s\n",sender);
         stop = send_data(IP,port,message,&s,&wsa);
     }
     printf("Vous n'etes plus connecte.");
