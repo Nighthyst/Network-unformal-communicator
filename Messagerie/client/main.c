@@ -11,11 +11,14 @@ int send_data(char  * IP, int port, char * message, SOCKET  * s, WSADATA * wsa);
 int receive_data(SOCKET * s, WSADATA * wsa);
 void chat_client();
 
+
 int send_data(char  * IP, int port, char * message, SOCKET * s, WSADATA * wsa)
 {
+
+
     //WSADATA wsa;
     //SOCKET s;
-    struct sockaddr_in server;
+
     //printf("\nInitialising Winsock...");
     if (WSAStartup(MAKEWORD(2,2),wsa) != 0)
     {
@@ -24,7 +27,7 @@ int send_data(char  * IP, int port, char * message, SOCKET * s, WSADATA * wsa)
     }
     //printf("Initialised.\n");
     //Create a socket
-    if((*s = socket(AF_INET , SOCK_STREAM , 0 )) == INVALID_SOCKET)
+    if((*s = socket(AF_INET , SOCK_STREAM, 6)) == INVALID_SOCKET)
     {
         printf("Could not create socket : %d" , WSAGetLastError());
         return 1;
@@ -34,11 +37,13 @@ int send_data(char  * IP, int port, char * message, SOCKET * s, WSADATA * wsa)
     server.sin_family = AF_INET; // The Internet Protocol version 4 (IPv4)
     server.sin_port = htons(port); // it would be a good idea to read Course Port Number
     //Connect to remote server
+
     if (connect(*s , (struct sockaddr *)&server , sizeof(server)) < 0)
     {
         puts("connect error");
         return 1;
     }
+
     //puts("Connected");
     //Send some data
 
