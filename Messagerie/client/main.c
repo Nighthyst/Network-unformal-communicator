@@ -1,7 +1,9 @@
+//This is the code for windows
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> // Penser à inclure string.h pour strchr()
-#include<winsock2.h>
+#include <string.h> 
+#include <winsock2.h>
 #include<dos.h>
 
 
@@ -9,33 +11,34 @@ struct sockaddr_in server;
 
 int send_data(char  * IP, int port, char * message, SOCKET  * s, WSADATA * wsa);
 int receive_data(SOCKET * s, WSADATA * wsa);
-void chat_client();
 
+/*
+The purpose of this function is to send a small message to a
+a server identified by its IP address and its port number.
 
+This function return 0 if the message was sent, 1 if not.
+*/
 int send_data(char  * IP, int port, char * message, SOCKET * s, WSADATA * wsa)
 {
 
-
-    //WSADATA wsa;
-    //SOCKET s;
-
-    //printf("\nInitialising Winsock...");
+    //Initialising Winsock...
     if (WSAStartup(MAKEWORD(2,2),wsa) != 0)
     {
         printf("Failed. Error Code : %d",WSAGetLastError());
         return 1;
     }
-    //printf("Initialised.\n");
+    //Initialised
+    
     //Create a socket
     if((*s = socket(AF_INET , SOCK_STREAM, 6)) == INVALID_SOCKET)
     {
         printf("Could not create socket : %d" , WSAGetLastError());
         return 1;
     }
-    //printf("Socket created.\n");
-    server.sin_addr.s_addr = inet_addr(IP); //google.fr
+    //Socket created
+    server.sin_addr.s_addr = inet_addr(IP); //The IP address of the server
     server.sin_family = AF_INET; // The Internet Protocol version 4 (IPv4)
-    server.sin_port = htons(port); // it would be a good idea to read Course Port Number
+    server.sin_port = htons(port); // The port number of the server
     //Connect to remote server
 
     if (connect(*s , (struct sockaddr *)&server , sizeof(server)) < 0)
@@ -44,9 +47,9 @@ int send_data(char  * IP, int port, char * message, SOCKET * s, WSADATA * wsa)
         return 1;
     }
 
-    //puts("Connected");
+    //Connected
+    
     //Send some data
-
     if( send(*s , message , strlen(message) , 0) < 0)
     {
         puts("Send failed");
@@ -80,8 +83,6 @@ int receive_data(SOCKET * s, WSADATA * wsa)
 
 int main(int argc , char *argv[])
 {
-    //viderBuffer();
-
     WSADATA wsa;
     SOCKET s;
 
@@ -98,29 +99,17 @@ int main(int argc , char *argv[])
     scanf("%d",&port);
     printf("Vous avez tape : %d\n", port);
 
-    char message[200];
-    //char sender[200];
-    char * sender = message;
-    //char * sender;
+    char message[280+1];
+
     int stop = 0;
     while(stop == 0)
     {
-        printf("Tapez votre message pour %s : %d (sans espace):\n",IP,port);
-        //viderBuffer();
-        fgets(message,200,stdin);
-        //sender = message;
-        //scanf("%s",&message);
-        //strncpy(sender,message,200);
-        printf("Vous voulez envoyer le message : %s\n",sender);
+        printf("Tapez votre message pour %s : %d:\n",IP,port);
+        fgets(message,280,stdin);
         stop = send_data(IP,port,message,&s,&wsa);
     }
     printf("Vous n'etes plus connecte.");
     return 0;
 }
 
-
-void chat_client()
-{
-
-}
 
