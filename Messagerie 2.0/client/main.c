@@ -63,8 +63,6 @@ int send_data(char  * IP, int port, char * message, SOCKET * s, WSADATA * wsa)
         }
 
 
-
-
         //Send some data
         if( send(*s , message , strlen(message) , 0) < 0)
         {
