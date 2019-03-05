@@ -36,6 +36,13 @@ int recvFile(char* buf, int s)
 {
     int i;
     char ch;
+    char * buffer = (char *)malloc((s+1)*sizeof(char));
+    FILE * write_ptr;
+
+    write_ptr = fopen("fichier.txt","wb");  // w for write, b for binary
+
+    fwrite(buffer,1,s,write_ptr); // write 10 bytes from our buffer
+
     for (i = 0; i < s; i++) {
         ch = buf[i];
         ch = Cipher(ch);
@@ -43,7 +50,9 @@ int recvFile(char* buf, int s)
             return 1;
         else
             printf("%c", ch);
+            fputc(ch,write_ptr);
     }
+    fclose(write_ptr); // Close the file
     return 0;
 }
 
